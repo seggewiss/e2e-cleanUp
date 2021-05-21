@@ -10,7 +10,7 @@ $ git clone git@github.com:seggewiss/e2e-cleanUp.git
 ```
 $ go mod download
 
-$ go build main.go
+$ make build
 
-$ ./main -path=/path/to/your/shopware/instance
+$ ./proxy -path=/path/to/your/shopware/instance
 ```
