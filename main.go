@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os/exec"
 	"strings"
+	"time"
 )
 
 // HttpHandler handles requests
@@ -18,20 +19,20 @@ type HttpHandler struct {
 func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	url := req.URL.String()
 	if url == "/cleanup" {
-		fmt.Println("Running e2e clean up")
+		fmt.Println(time.Now().UTC().Format(time.UnixDate) + ": Running e2e clean up")
 		CleanUp(h, res)
 
 		return
 	}
 
 	if strings.Index(url, "/build-exclusions?templateId=") == 0 {
-		fmt.Println("Building template exclusions")
+		fmt.Println(time.Now().UTC().Format(time.UnixDate) + ": Building template exclusions")
 		BuildExclusionTree(h, res, req)
 
 		return
 	}
 
-	log.Fatal("Could not handle requested URL: " + url)
+	log.Fatalln("No handler found for url: " + url)
 }
 
 func CleanUp(h HttpHandler, res http.ResponseWriter) {
@@ -87,7 +88,6 @@ func main() {
 	cmd.Dir = *pathPointer
 
 	err := cmd.Run()
-
 	if err != nil {
 		log.Fatal(err)
 	}
