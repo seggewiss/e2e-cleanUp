@@ -8,6 +8,8 @@ $ git clone git@github.com:seggewiss/e2e-cleanUp.git
 
 # Usage
 ```
+$ go mod download
+
 $ go build main.go
 
 $ ./main -path=/path/to/your/shopware/instance
