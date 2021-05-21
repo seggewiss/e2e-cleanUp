@@ -27,6 +27,8 @@ func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	if strings.Index(url, "/build-exclusions?templateId=") == 0 {
 		fmt.Println("Building template exclusions")
 		BuildExclusionTree(h, res, req)
+
+		return
 	}
 
 	log.Fatal("Could not handle requested URL: " + url)
